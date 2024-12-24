@@ -108,5 +108,26 @@
             Don't have an account? <a href="/signup">EXIT</a>
         </div>
     </div>
+    <a href="index.html" id="next"></a>
+    <script>
+         document.getElementById('signup-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            let pass =  LocalStorage.getItem(email);
+           if(pass === password){
+                   click();
+                alert('login-up successful!');
+
+           }
+           
+           
+            document.getElementById('signup-form').reset();
+        });
+        function click(){
+            document.getElementById('next').click;
+            
+        }
+    </script>
 </body>
 </html>
