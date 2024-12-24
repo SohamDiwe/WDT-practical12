@@ -1,218 +1,206 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <style>
-    body, h1, h2, h3, p, ul, li, a, input, button {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: Arial, sans-serif;
-}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up</title>
+    <style>
+        /* Reusing styles from the Login page */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+            color: #333;
+        }
 
-body {
-  background-color: #f4f4f9;
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-  margin: 0;
-}
+        .nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #4CAF50;
+            padding: 10px 20px;
+        }
 
-/* Header */
-header.nav {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background-color: #333;
-  padding: 10px 20px;
-}
+        .nav .logo img {
+            height: 50px;
+        }
 
-header.nav .logo img {
-  height: 50px;
-}
+        .nav .buttons ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            gap: 15px;
+        }
 
-header.nav .buttons ul {
-  list-style: none;
-  display: flex;
-}
+        .nav .buttons ul a {
+            text-decoration: none;
+            color: white;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
 
-header.nav .buttons ul li {
-  margin-left: 20px;
-}
+        .nav .buttons ul a:hover {
+            color: #f1f1f1;
+        }
 
-header.nav .buttons ul li a {
-  color: white;
-  text-decoration: none;
-  font-size: 16px;
-}
+        .main {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: calc(100vh - 120px);
+            padding: 20px;
+        }
 
-header.nav .buttons ul li a:hover {
-  color: #ffd700;
-}
+        .container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+        }
 
-/* Main Content */
-.main {
-  flex: 1;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 20px;
-}
+        .container h2 {
+            margin-bottom: 20px;
+            color: #4CAF50;
+        }
 
-.signup-container {
-  background-color: white;
-  padding: 30px;
-  border-radius: 10px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  width: 100%;
-  max-width: 400px;
-  text-align: center;
-}
+        .input-group {
+            margin-bottom: 15px;
+            text-align: left;
+        }
 
-.signup-container h2 {
-  margin-bottom: 20px;
-  color: #333;
-}
+        .input-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
 
-.input-group {
-  margin-bottom: 15px;
-  text-align: left;
-}
+        .input-group input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+        }
 
-.input-group label {
-  display: block;
-  margin-bottom: 5px;
-  font-weight: bold;
-}
+        button[type="submit"] {
+            width: 100%;
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
 
-.input-group input {
-  width: 100%;
-  padding: 10px;
-  border: 1px solid #ddd;
-  border-radius: 5px;
-  font-size: 14px;
-}
+        button[type="submit"]:hover {
+            background-color: #45a049;
+        }
 
-.input-group input:focus {
-  border-color: #007bff;
-  outline: none;
-  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
-}
+        .container p {
+            margin-top: 20px;
+        }
 
-#signup-button {
-  background-color: #007bff;
-  color: white;
-  padding: 10px 15px;
-  border: none;
-  border-radius: 5px;
-  font-size: 16px;
-  cursor: pointer;
-  transition: background-color 0.3s;
-}
+        .container a {
+            color: #4CAF50;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
 
-#signup-button:hover {
-  background-color: #0056b3;
-}
+        .container a:hover {
+            color: #45a049;
+        }
 
-.signup-container p {
-  margin-top: 15px;
-  font-size: 14px;
-}
+        footer {
+            text-align: center;
+            padding: 10px 20px;
+            background-color: #333;
+            color: white;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+        }
 
-.signup-container p a {
-  color: #007bff;
-  text-decoration: none;
-}
+        footer a {
+            color: #4CAF50;
+            text-decoration: none;
+            margin: 0 10px;
+        }
 
-.signup-container p a:hover {
-  text-decoration: underline;
-}
+        footer a:hover {
+            color: #45a049;
+        }
+    </style>
+    <script>
+        function storeSignupData(event) {
+            event.preventDefault(); // Prevent form submission
 
-/* Footer */
-footer {
-  background-color: #333;
-  color: white;
-  text-align: center;
-  padding: 10px 0;
-}
+            const username = document.getElementById('username').value;
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirm-password').value;
 
-footer a {
-  color: #ffd700;
-  text-decoration: none;
-  margin: 0 5px;
-}
+            if (password === confirmPassword) {
+                const user = { username, email, password };
+                localStorage.setItem('user', JSON.stringify(user));
 
-footer a:hover {
-  text-decoration: underline;
-}
-</style>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Sign Up</title>
-  <link rel="stylesheet" href="style.css">
-  <script>
-    function storeSignupData(event) {
-      event.preventDefault(); // Prevent form submission
-
-      const username = document.getElementById('username').value;
-      const email = document.getElementById('email').value;
-      const password = document.getElementById('password').value;
-      const confirmPassword = document.getElementById('confirm-password').value;
-
-      if (password === confirmPassword) {
-        // Save user data to localStorage
-        const user = { username, email, password }; // Create user object
-        localStorage.setItem('user', JSON.stringify(user)); // Store user data as JSON
-
-        alert("Signup successful! You can now log in.");
-        window.location.href = "login.html"; // Redirect to login page
-      } else {
-        alert("Passwords do not match. Please try again.");
-      }
-    }
-  </script>
+                alert("Signup successful! You can now log in.");
+                window.location.href = "login.html";
+            } else {
+                alert("Passwords do not match. Please try again.");
+            }
+        }
+    </script>
 </head>
 <body>
-  <header class="nav">
-    <div class="logo">
-      <img class="logo-1" src="renq.png" alt="Logo">
-    </div>
-    <div class="buttons">
-      <ul>
-        <li><a href="index.html">HOME</a></li>
-        <li><a href="join.html">JOIN</a></li>
-        <li><a href="help.html">HELP</a></li>
-      </ul>
-    </div>
-  </header>
+    <header class="nav">
+        <div class="logo">
+            <img src="renq.png" alt="Logo">
+        </div>
+        <div class="buttons">
+            <ul>
+                <a href="index.html">HOME</a>
+                <a href="login.html">LOGIN</a>
+                <a href="help.html">HELP</a>
+            </ul>
+        </div>
+    </header>
 
-  <div class="main">
-    <div class="signup-container">
-      <h2>Sign Up</h2>
-      <form action="#" method="post" onsubmit="storeSignupData(event)">
-        <div class="input-group">
-          <label for="username">Username</label>
-          <input type="text" id="username" name="username" required>
+    <div class="main">
+        <div class="container">
+            <h2>Sign Up</h2>
+            <form onsubmit="storeSignupData(event)">
+                <div class="input-group">
+                    <label for="username">Username</label>
+                    <input type="text" id="username" required>
+                </div>
+                <div class="input-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" required>
+                </div>
+                <div class="input-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" required>
+                </div>
+                <div class="input-group">
+                    <label for="confirm-password">Confirm Password</label>
+                    <input type="password" id="confirm-password" required>
+                </div>
+                <button type="submit">Sign Up</button>
+            </form>
+            <p>Already have an account? <a href="login.html">Log in here</a>.</p>
         </div>
-        <div class="input-group">
-          <label for="email">Email</label>
-          <input type="email" id="email" name="email" required>
-        </div>
-        <div class="input-group">
-          <label for="password">Password</label>
-          <input type="password" id="password" name="password" required>
-        </div>
-        <div class="input-group">
-          <label for="confirm-password">Confirm Password</label>
-          <input type="password" id="confirm-password" name="confirm-password" required>
-        </div>
-        <button type="submit" id="signup-button">Sign Up</button>
-      </form>
-      <p>Already have an account? <a href="login.html">Log in here</a>.</p>
     </div>
-  </div>
 
-  <footer>
-    <a href="tc.html">T&C</a> | <a href="tc.html">PRIVACY POLICY</a> | <a href="tc.html">COPYRIGHTS</a>
-  </footer>
+    <footer>
+        <a href="tc.html">T&C</a> | <a href="privacy.html">Privacy Policy</a> | <a href="copyright.html">Copyrights</a>
+    </footer>
 </body>
 </html>
